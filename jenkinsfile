@@ -1,0 +1,21 @@
+pipeline {
+  agent any
+  stages {
+    stage('Compile') {
+      agent {
+        docker {
+          image 'ubuntu'
+        }
+      }
+      steps {
+        sh 'ls -l'
+        sh './compile.sh'
+      }
+      post {
+        always {
+          cleanWs()
+        }
+      }
+    }
+  }
+}
